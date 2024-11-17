@@ -1,7 +1,27 @@
 doctype html
 html
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    title Car Wash
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css')
   body
-    block content
+   nav.navbar.navbar-expand-lg.navbar-light.bg-light
+      a.navbar-brand(href='/') JAJ Car Wash
+      .collapse.navbar-collapse#navbarNav
+        ul.navbar-nav.ml-auto
+          if !user
+            li.nav-item
+              a.nav-link(href='/users/login') Login
+            li.nav-item
+              a.nav-link(href='/users/register') Register
+          else
+            li.nav-item
+              a.nav-link(href='/users/logout') Logout
+  .container
+      if success_msg
+        .alert.alert-success= success_msg
+      if error_msg
+        .alert.alert-danger= error_msg
+      if error
+        .alert.alert-danger= error
+      block content
+
