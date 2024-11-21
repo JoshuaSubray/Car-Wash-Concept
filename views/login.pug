@@ -2,10 +2,12 @@ extends layout
 
 block content
   h1 Login
+  if error_msg
+    .alert.alert-danger= error_msg
   form(action='/users/login' method='POST')
     .form-group 
       label(for='email') Email 
-      input.form-control(type='email' id='email' name='name' required)
+      input.form-control(type='email' id='email' name='email' required)
     .form-group  
       label(for='password') Password 
       input.form-control(type='password' id='password' name='password' required)

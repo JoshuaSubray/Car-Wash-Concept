@@ -4,10 +4,18 @@ html
     title Car Wash
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css')
   body
-   nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light
       a.navbar-brand(href='/') JAJ Car Wash
       .collapse.navbar-collapse#navbarNav
         ul.navbar-nav.ml-auto
+          li.nav-item
+            a.nav-link(href='/about') About
+          li.nav-item
+            a.nav-link(href='/prices') Prices
+          li.nav-item
+            a.nav-link(href='/reviews') Reviews
+          li.nav-item
+            a.nav-link(href='/contact').mr-3 Contact
           if !user
             li.nav-item
               a.nav-link(href='/users/login') Login
@@ -16,12 +24,6 @@ html
           else
             li.nav-item
               a.nav-link(href='/users/logout') Logout
-  .container
-      if success_msg
-        .alert.alert-success= success_msg
-      if error_msg
-        .alert.alert-danger= error_msg
-      if error
-        .alert.alert-danger= error
+    .container
       block content
 

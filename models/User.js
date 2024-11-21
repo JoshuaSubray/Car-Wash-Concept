@@ -7,20 +7,34 @@ const UserSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
   password: {
     type: String,
     required: true
   }
 });
 
-// Method to hash password
-UserSchema.methods.hashPassword = function(password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-};
+// Hash password before saving
+UserSchema.pre('save', async function(next) {
+  if (!this.isModified('password')) {
+    return next();
+  }
+  try {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
 
-// Method to validate password
-UserSchema.methods.validPassword = function(password) {
-  return bcrypt.compareSync(password, this.password);
+// Compare password for login
+UserSchema.methods.comparePassword = function(candidatePassword) {
+  return bcrypt.compare(candidatePassword, this.password);
 };
 
 module.exports = mongoose.model('User', UserSchema);
