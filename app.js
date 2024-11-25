@@ -8,6 +8,7 @@ var flash = require('connect-flash');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var passport = require('./config/passport'); 
+const Appointment = require('./models/Appointment');
 
 var app = express();
 

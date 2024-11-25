@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1.text-center.text-primary Book an Appointment
+  if success_msg
+    .alert.alert-success= success_msg
+  if error_msg
+    .alert.alert-danger= error_msg
+  form(action='/appointments' method='POST' class='mt-4')
+    .form-group
+      label(for='name') Name
+      input.form-control(type='text' id='name' name='name' required)
+    .form-group
+      label(for='email') Email
+      input.form-control(type='email' id='email' name='email' required)
+    .form-group
+      label(for='date') Appointment Date
+      input.form-control(type='date' id='date' name='date' required)
+    .form-group
+      label(for='message') Message
+      textarea.form-control(id='message' name='message' rows='3')
+    button.btn.btn-primary(type='submit') Submit

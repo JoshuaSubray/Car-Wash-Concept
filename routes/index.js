@@ -1,15 +1,10 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const router = express.Router();
+const { mongoose, loginConnection } = require('../config/db');
 
 router.use(express.urlencoded({ extended: true }));
 router.use(methodOverride('_method'));
-
-const uri = 'mongodb+srv://jamesgriffiths23:1054g087@central.r9mof.mongodb.net/userAuth';
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('Error connecting to MongoDB', err));
 
 const usersRouter = require('./users');
 router.use('/users', usersRouter); // Added users router
@@ -37,6 +32,41 @@ router.get('/reviews', function(req, res, next) {
 /* GET contact page. */
 router.get('/contact', function(req, res, next) {
   res.render('contact', { title: 'Contact Us' });
+});
+
+router.get('/appointments', function(req, res, next) {
+  res.render('appointments', { title: 'Appointments' });
+})
+
+router.post('/appointments', async (req, res) => {
+  const { name, email, date, message } = req.body;
+  let errors = [];
+
+  if (!name || !email || !date) {
+    errors.push({ msg: 'Please enter all required fields' });
+  }
+
+  if (errors.length > 0) {
+    res.render('appointments', {
+      errors,
+      name,
+      email,
+      date,
+      message
+    });
+  } else {
+    try {
+      // Save the appointment to the database (assuming you have an Appointment model)
+      const newAppointment = new Appointment({ name, email, date, message });
+      await newAppointment.save();
+      req.flash('success_msg', 'Your appointment has been booked');
+      res.redirect('/appointments');
+    } catch (err) {
+      console.error('Error booking appointment:', err);
+      req.flash('error_msg', 'Error booking appointment');
+      res.redirect('/appointments');
+    }
+  }
 });
 
 module.exports = router;
