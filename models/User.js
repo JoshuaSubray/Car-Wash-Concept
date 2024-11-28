@@ -31,7 +31,7 @@ const UserSchemaLogin = new mongoose.Schema({
   }
 });
 
-// Hash password before saving
+// Hash password before saving.
 UserSchema.pre('save', async function(next) {
   if (!this.isModified('password')) {
     return next();
@@ -45,12 +45,12 @@ UserSchema.pre('save', async function(next) {
   }
 });
 
-// Compare password for login
+// Compare password for login.
 UserSchema.methods.comparePassword = function(candidatePassword) {
   return bcrypt.compare(candidatePassword, this.password);
 };
 
-// Hash password before saving
+// Hash password before saving.
 UserSchemaLogin.pre('save', async function(next) {
   if (!this.isModified('password')) {
     return next();
@@ -64,7 +64,7 @@ UserSchemaLogin.pre('save', async function(next) {
   }
 });
 
-// Compare password for login
+// Compare password for login.
 UserSchemaLogin.methods.comparePassword = function(candidatePassword) {
   return bcrypt.compare(candidatePassword, this.password);
 };

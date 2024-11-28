@@ -9,34 +9,32 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var passport = require('./config/passport'); 
 const Appointment = require('./models/Appointment');
-
 var app = express();
 
-// view engine setup
+// view engine middleware.
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Add session middleware
+// session middleware.
 app.use(session({
   secret: 'your_secret_key',
   resave: false,
   saveUninitialized: true
 }));
 
-// Add flash middleware
+// flash middleware.
 app.use(flash());
 
-// Initialize passport
+// initialize passport.
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Make flash messages available in all views
+// make flash messages available in all views.
 app.use(function(req, res, next) {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
@@ -44,23 +42,30 @@ app.use(function(req, res, next) {
   next();
 });
 
+// router.
 app.use('/', indexRouter);
-app.use('/users', usersRouter); // Ensure this line is present
+app.use('/users', usersRouter); // Ensure this line is present.
 
-// catch 404 and forward to error handler
+// catch error 404 and forward to error handler.
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// error handler
+// error handler.
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
+  // set locals, only providing error in development.
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
+  // render the error page.
   res.status(err.status || 500);
   res.render('error');
+});
+
+// port.
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Open your browser at 'http://localhost:${port}'.`);
 });
 
 module.exports = app;

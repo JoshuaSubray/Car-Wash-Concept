@@ -3,10 +3,12 @@ const router = express.Router();
 const { User, UserLogin } = require('../models/User');
 const passport = require('passport');
 
+/* GET register page. */
 router.get('/register', function(req, res, next) {
   res.render('register', { title: 'Register' });
 });
 
+// register page validation.
 router.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
   let errors = [];
@@ -45,10 +47,12 @@ router.post('/register', async (req, res) => {
   }
 });
 
+/* GET login page. */
 router.get('/login', function(req, res, next) {
   res.render('login', { title: 'Login' });
 });
 
+// authenticate login page.
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', {
     successRedirect: '/',
