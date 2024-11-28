@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  h1 Customer Reviews
+
+  if success_msg
+    .alert.alert-success= success_msg
+
+  p Here's what our customers are saying about us!
+
+  .container
+    .reviews
+      each review in reviews
+        .review-box
+          p= '"' + review.review + '"'
+          p= '- ' + review.name
+
+  // Review Submission Form
+  .container.mt-5
+    h3 Write a Review
+    form(action='/reviews', method='POST')
+      .form-group
+        label(for='name') Your Name
+        input#name.form-control(type='text', placeholder='Enter Your Name', name='name', required)
+      .form-group
+        label(for='review') Your Review
+        textarea#review.form-control(placeholder='Enter Your Review', rows='5', name='review', required)
+      button#submitBtn.btn.btn-primary(type='submit') Submit Review

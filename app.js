@@ -7,6 +7,7 @@ var session = require('express-session');
 var flash = require('connect-flash');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var reviewsRouter = require('./routes/reviews'); // Import the reviews route
 var passport = require('./config/passport'); 
 const Appointment = require('./models/Appointment');
 var app = express();
@@ -44,7 +45,8 @@ app.use(function(req, res, next) {
 
 // router.
 app.use('/', indexRouter);
-app.use('/users', usersRouter); // Ensure this line is present.
+app.use('/users', usersRouter); // Ensure this line is present
+app.use('/reviews', reviewsRouter); // Add the reviews route
 
 // catch error 404 and forward to error handler.
 app.use(function(req, res, next) {

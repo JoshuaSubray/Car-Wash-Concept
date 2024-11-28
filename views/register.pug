@@ -20,4 +20,11 @@ block content
     .form-group
       label(for='password') Password
       input.form-control(type='password' id='password' name='password' required)
+    .form-group
+      label(for='confirmPassword') Confirm Password
+      input.form-control(type='password' id='confirmPassword' name='confirmPassword' required)
     button.btn.btn-primary(type='submit') Register
+
+  p(style='text-align: center; margin-top: 20px;') 
+    | Have an account already? 
+    a(href='/users/login') Please log in here.

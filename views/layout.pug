@@ -9,23 +9,23 @@ html
       .collapse.navbar-collapse#navbarNav
         ul.navbar-nav.ml-auto
           li.nav-item
-            a.nav-link(href='/about') About
+            a.nav-link(href='/about').mr-3 About
           li.nav-item
-            a.nav-link(href='/prices') Prices
+            a.nav-link(href='/prices').mr-3 Prices
           li.nav-item
-            a.nav-link(href='/reviews') Reviews
+            a.nav-link(href='/reviews').mr-3 Reviews
           li.nav-item
             a.nav-link(href='/contact').mr-3 Contact
           li.nav-item
             a.nav-link(href='/appointments').mr-3 Appointments
           if !user
             li.nav-item
-              a.nav-link(href='/users/login') Login
+              a.nav-link(href='/users/login').mr-3 Login
             li.nav-item
-              a.nav-link(href='/users/register') Register
+              a.nav-link(href='/users/register').mr-3 Register
           else
             li.nav-item
-              a.nav-link(href='/users/logout') Logout
+              a.nav-link(href='/users/logout').mr-3 Logout
     .container
       block content
 

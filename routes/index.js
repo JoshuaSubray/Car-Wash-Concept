@@ -11,7 +11,7 @@ router.use('/users', usersRouter); // Added users router.
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Welcome to JAJ Car Wash ' });
+  res.render('index', { title: 'Welcome to JAJ Car Wash test test' });
 });
 
 /* GET about page. */

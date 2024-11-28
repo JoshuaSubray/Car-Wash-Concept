@@ -1,8 +1,71 @@
+//- extends layout
+
+//- block content
+//-   if success_msg
+//-     .alert.alert-success= success_msg
+
+//-   h1(style='font-size: 30px;')= title
+//-   p(style='font-size: 30px;') Welcome to JAJ Car Wash
+
+//-   // Basic attractive text for the car wash
+//-   p(style='font-size: 30px;') We offer a fast, affordable, and eco-friendly car wash service that will make your car shine like new!
+
+//-   // Call-to-action to book an appointment
+//-   p(style='font-size: 30px;') Get your car cleaned today!
+//-   a(href='/appointments' style='font-size: 30px;') Book an Appointment
+
+//-   p(style='font-size: 30px;') Get your car cleaned today!
+//-   a(href='/prices' style='font-size: 30px;') prices
+
+//-   p(style='font-size: 30px;') Get your car cleaned today!
+//-   a(href='/register' style='font-size: 30px;') register
+
+//-   p(style='font-size: 30px;') Get your car cleaned today!
+//-   a(href='/login' style='font-size: 30px;') login
+  
+//-   p(style='font-size: 30px;') Get your car cleaned today!
+//-   a(href='/contact' style='font-size: 30px;') contact
+
+//-   p(style='font-size: 30px;') Get your car cleaned today!
+//-   a(href='/about' style='font-size: 30px;') Want to know more about us and what we do?
+
+
 extends layout
 
 block content
+  // Link to the external CSS file (index.css)
+  link(rel='stylesheet', href='../public/stylesheets/index.css')
+
+  // Display success message if available
   if success_msg
     .alert.alert-success= success_msg
 
-  h1= title
-  p Welcome to JAJ Car Wash
+  // Main Title
+  h1 Welcome to JAJ Car Wash
+
+  // Basic attractive text for the car wash
+  p We offer a fast, affordable, and eco-friendly car wash service that will make your car shine like new!
+
+  // Book an appointment link
+  p
+    a(href='/appointments') Book an Appointment
+
+  // Prices link
+  p
+    a(href='/prices') View Prices
+
+  // Register link
+  p
+    a(href='/register') Register for Our Services
+
+  // Login link
+  p
+    a(href='/login') Login to Your Account
+  
+  // Contact link
+  p
+    a(href='/contact') Contact Us
+
+  // About Us link
+  p
+    a(href='/about') Want to know more about us and what we do?

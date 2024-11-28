@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  if success_msg
+    .alert.alert-success= success_msg
+
+  // Page Title
+  h1(style='font-size: 48px; text-align: center;') Our Pricing Plans
+
+  // Introduction
+  p(style='font-size: 24px; text-align: center;') Choose the plan that suits you best and book an appointment today!
+
+  // Pricing Options
+  .container.mt-5
+    .row
+      // Basic Plan
+      .col-md-6
+        .pricing-plan
+          h3 Basic Plan
+          p(style='font-size: 20px;') Only $19.99 per wash
+          p(style='font-size: 16px;') Fast and affordable, perfect for regular cleaning
+          a.btn.btn-primary(href='/appointments') Make an Appointment with this Plan
+
+      // Premium Plan
+      .col-md-6
+        .pricing-plan
+          h3 Premium Plan
+          p(style='font-size: 20px;') Only $29.99 per wash
+          p(style='font-size: 16px;') Includes deep cleaning, ideal for premium care
+          a.btn.btn-primary(href='/appointments') Make an Appointment with this Plan
