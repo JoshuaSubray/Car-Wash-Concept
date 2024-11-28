@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { User, UserLogin } = require('../models/User');
+const Appointment = require('../models/Appointment');
 const passport = require('passport');
 
 /* GET register page. */
@@ -58,7 +59,40 @@ router.post('/login', (req, res, next) => {
     successRedirect: '/',
     failureRedirect: '/users/login',
     failureFlash: true
+  }, (err, user, info) => {
+    if (err) return next(err);
+    if (!user) return res.redirect('/users/login');
+    req.logIn(user, (err) => {
+      if (err) return next(err);
+      req.flash('success_msg', 'Successfully logged in!');
+      return res.redirect('/');
+    });
   })(req, res, next);
+});
+
+// logout page. 
+router.get('/logout', (req, res, next) => {
+  req.logout((err) => {
+    if (err) return next(err);
+    req.flash('success_msg', 'Successfully logged out!');
+    res.redirect('/');
+  });
+});
+
+// GET profile page.
+router.get('/profile', async (req, res) => {
+  if (!req.isAuthenticated()) {
+    req.flash('error_msg', 'Please log in to view your profile');
+    return res.redirect('/users/login');
+  }
+  try {
+    const appointments = await Appointment.find({ email: req.user.email });
+    res.render('profile', { title: 'Your Profile', user: req.user, appointments });
+  } catch (err) {
+    console.error('Error fetching appointments:', err);
+    req.flash('error_msg', 'Error fetching appointments');
+    res.redirect('/');
+  }
 });
 
 module.exports = router;
