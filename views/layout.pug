@@ -3,6 +3,7 @@ html
   head
     title Car Wash
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css')
   body
     nav.navbar.navbar-expand-lg.navbar-light.bg-light
       a.navbar-brand(href='/') JAJ Car Wash
@@ -15,9 +16,7 @@ html
           li.nav-item
             a.nav-link(href='/reviews').mr-3 Reviews
           li.nav-item
-            a.nav-link(href='/contact').mr-3 Contact
-          li.nav-item
-            a.nav-link(href='/appointments').mr-3 Appointments
+            a.nav-link(href='/appointments').mr-3 Book Appointment
           if !user
             li.nav-item
               a.nav-link(href='/users/login').mr-3 Login
@@ -25,8 +24,15 @@ html
               a.nav-link(href='/users/register').mr-3 Register
           else
             li.nav-item
-              a.nav-link(href='/users/logout').mr-3 Logout
+              a.nav-link(href='/users/profile') Profile
+              a.nav-link(href="bi bi-file-person-fill") 
+            li.nav-item
+              a.nav-link(href='/users/logout') Logout
     .container
+      if success_msg
+        .alert.alert-success= success_msg
+      if error_msg
+        .alert.alert-danger= error_msg
       block content
 
 

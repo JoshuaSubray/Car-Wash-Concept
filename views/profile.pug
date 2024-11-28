@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  h1.text-center.text-primary Your Profile
+
+  h2.text-center.mt-5 Welcome, #{user.username}
+  p.text-center.mt-5 Email: #{user.email}
+  h3.text-center.mt-5 Your Appointments
+  if appointments.length
+    table.table.table-striped
+      thead
+        tr
+          th Name
+          th Email
+          th Date
+          th Message
+      body
+        each appointment in appointments
+          tr
+            td= appointment.name
+            td= appointment.email
+            td= appointment.date.toDateString()
+            td= appointment.message
+  else
+    p.text-center.mt-4 You have no appointments booked.
