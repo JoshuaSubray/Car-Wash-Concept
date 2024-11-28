@@ -7,7 +7,7 @@ router.use(express.urlencoded({ extended: true }));
 router.use(methodOverride('_method'));
 
 const usersRouter = require('./users');
-router.use('/users', usersRouter); // Added users router
+router.use('/users', usersRouter); // Added users router.
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -34,10 +34,12 @@ router.get('/contact', function(req, res, next) {
   res.render('contact', { title: 'Contact Us' });
 });
 
+/* GET appointments page. */
 router.get('/appointments', function(req, res, next) {
   res.render('appointments', { title: 'Appointments' });
 })
 
+// appointments page validation.
 router.post('/appointments', async (req, res) => {
   const { name, email, date, message } = req.body;
   let errors = [];
