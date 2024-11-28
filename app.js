@@ -63,4 +63,10 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+// port.
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Open your browser at 'http://localhost:${port}'.`);
+});
+
 module.exports = app;
