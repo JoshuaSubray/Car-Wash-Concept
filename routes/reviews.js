@@ -4,25 +4,39 @@ const router = express.Router();
 // In-memory storage for reviews (replace with a database in production).
 let reviews = [];
 
-/* GET reviews page. */
+/* GET reviews page */
 router.get('/', (req, res) => {
-  if (!req.isAuthenticated()) { // must be logged in to make an review.
-    req.flash('error_msg', 'Please log in to make a review.');
-    return res.redirect('/users/login');
-  }
-
-  res.render('reviews', { reviews: reviews });
+  res.render('reviews', { reviews });
 });
 
-// POST route to handle review submission.
+// POST route to handle review submission
 router.post('/', (req, res) => {
   const { name, review } = req.body;
 
-  // Save the review in memory (or replace this with a database logic).
-  reviews.push({ name, review });
+  // Create a review object with a unique ID
+  const newReview = {
+    _id: new Date().toISOString(), // Use a timestamp for simplicity
+    name,
+    review
+  };
 
-  // Redirect to the reviews page after submission.
+  // Save the review in memory
+  reviews.push(newReview);
+
+  // Redirect to the reviews page after submission
   req.flash('success_msg', 'Your review has been submitted!');
+  res.redirect('/reviews');
+});
+
+// POST route to handle review deletion
+router.post('/delete/:id', (req, res) => {
+  const reviewId = req.params.id;
+
+  // Find and remove the review from the in-memory array
+  reviews = reviews.filter(review => review._id !== reviewId);
+
+  // Redirect back to reviews page with success message
+  req.flash('success_msg', 'Review deleted successfully');
   res.redirect('/reviews');
 });
 

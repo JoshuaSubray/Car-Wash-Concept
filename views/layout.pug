@@ -51,12 +51,15 @@ html
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css')
     // Bootstrap Icons
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css')
+    // Custom CSS (Ensure layout.css contains button styles)
+    link(rel='stylesheet', href='/stylesheets/layout.css')
+
   body
     // Navbar
     nav.navbar.navbar-expand-lg.navbar-light.bg-light
       a.navbar-brand(href='/') JAJ Car Wash
       if user
-        span.navbar-text.ml-3 Welcome, #{user.username}!
+        a.navbar-brand.ml-5 Welcome, #{user.username}!
       button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarNav", aria-controls="navbarNav", aria-expanded="false", aria-label="Toggle navigation")
         span.navbar-toggler-icon
       .collapse.navbar-collapse#navbarNav
@@ -92,4 +95,3 @@ html
     script(src='https://code.jquery.com/jquery-3.6.0.min.js', integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+5hb7U1lvE4I2pBMEgAG1MeFdhJl4WBCrkuwzOn", crossorigin="anonymous")
     script(src='https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js', integrity="sha384-eMN6PbPpcklnt+zFVPOxRp8lhyHoFkT8Zy4RXTVrvtD/ABJPzzOe4nG4u8p8fAvj", crossorigin="anonymous")
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js')
-
