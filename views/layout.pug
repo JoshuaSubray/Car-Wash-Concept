@@ -1,12 +1,14 @@
 doctype html
 html
   head
-    title Car Wash
+    title JAJ Car Wash
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css')
   body
     nav.navbar.navbar-expand-lg.navbar-light.bg-light
       a.navbar-brand(href='/') JAJ Car Wash
+      if user
+        a.navbar-brand.ml-5 Welcome, #{user.username}!
       .collapse.navbar-collapse#navbarNav
         ul.navbar-nav.ml-auto
           li.nav-item

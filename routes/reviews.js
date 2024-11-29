@@ -1,23 +1,27 @@
-// routes/reviews.js
 const express = require('express');
 const router = express.Router();
 
-// In-memory storage for reviews (replace with a database in production)
+// In-memory storage for reviews (replace with a database in production).
 let reviews = [];
 
-// GET route to render reviews page
+/* GET reviews page. */
 router.get('/', (req, res) => {
-  res.render('reviews', { reviews: reviews });
+  if (!req.isAuthenticated()) { // must be logged in to make an review.
+    req.flash('error_msg', 'Please log in to make a review.');
+    return res.redirect('/users/login');
+  }
+
+  res.render('reviews', { reviews: Reviews });
 });
 
-// POST route to handle review submission
+// POST route to handle review submission.
 router.post('/', (req, res) => {
   const { name, review } = req.body;
-  
-  // Save the review in memory (or replace this with a database logic)
+
+  // Save the review in memory (or replace this with a database logic).
   reviews.push({ name, review });
 
-  // Redirect to the reviews page after submission
+  // Redirect to the reviews page after submission.
   req.flash('success_msg', 'Your review has been submitted!');
   res.redirect('/reviews');
 });

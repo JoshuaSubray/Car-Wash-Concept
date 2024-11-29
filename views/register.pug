@@ -10,6 +10,10 @@ block content
   if error
     .alert.alert-danger= error
 
+  p(style='text-align: center; margin-top: 20px;') 
+    | Already have an account? 
+    a(href='/users/login') Please log in here.
+
   form(action='/users/register' method='POST')
     .form-group
       label(for='username') Username
@@ -24,7 +28,3 @@ block content
       label(for='confirmPassword') Confirm Password
       input.form-control(type='password' id='confirmPassword' name='confirmPassword' required)
     button.btn.btn-primary(type='submit') Register
-
-  p(style='text-align: center; margin-top: 20px;') 
-    | Have an account already? 
-    a(href='/users/login') Please log in here.
