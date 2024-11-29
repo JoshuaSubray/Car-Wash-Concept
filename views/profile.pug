@@ -18,6 +18,8 @@ block content
               th Name
               th Email
               th Date
+              th Package
+              th Price
               th Message
           tbody
             each appointment in appointments
@@ -25,6 +27,9 @@ block content
                 td= appointment.name
                 td= appointment.email
                 td= appointment.date.toDateString()
-                td= appointment.message
+                td= appointment.package
+                td= appointment.price
+                td= appointment.message || 'N/A'
+
     else
       p.text-center.text-muted.mt-4(style='font-size: 18px;') You have no appointments booked.

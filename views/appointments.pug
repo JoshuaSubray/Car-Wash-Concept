@@ -9,14 +9,24 @@ block content
   form(action='/appointments' method='POST' class='mt-4')
     .form-group
       label(for='name') Name
-      input.form-control(type='text' id='name' name='name' placeholder='Enter your name' required)
+      input.form-control(type='text' id='name' name='name' placeholder='Enter your name.' value=username required)
     .form-group
       label(for='email') Email
-      input.form-control(type='email' id='email' name='email' placeholder='Enter your email' required)
+      input.form-control(type='email' id='email' name='email' placeholder='Enter your email.' value=email readonly required)
     .form-group
       label(for='date') Appointment Date
       input.form-control(type='date' id='date' name='date' required)
     .form-group
+      label(for='package') Service Package
+      select.form-control(id='package' name='package' required)
+        option(value='' selected disabled) Select service package.
+        option(value='Basic') Basic Package
+        option(value='Business ') Business Package
+        option(value='Premium') Premium Package
+        option(value='Deluxe') Deluxe Package
+        option(value='VIP') VIP Package
+        option(value='Royal') Royal Package
+    .form-group
       label(for='message') Additional Information
-      textarea.form-control(id='message' name='message' rows='4' placeholder='Any special requests or information')
+      textarea.form-control(id='message' name='message' rows='4' placeholder='Any special requests or information.')
     button.btn.btn-primary(type='submit') Book Appointment

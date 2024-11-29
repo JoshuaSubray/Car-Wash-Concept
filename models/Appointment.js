@@ -15,6 +15,12 @@ const AppointmentSchema = new mongoose.Schema({
   },
   message: {
     type: String
+  },
+  package: {
+    type: String
+  },
+  price: {
+    type: String
   }
 });
 

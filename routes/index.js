@@ -14,6 +14,10 @@ router.use('/users', usersRouter);
 const appointmentsRouter = require('./appointments');
 router.use('/appointments', appointmentsRouter);
 
+// payment router.
+const paymentRouter = require('./payment');
+router.use('/payment', paymentRouter);
+
 // reviews router.
 const reviewsRouter = require('./reviews');
 router.use('/reviews', reviewsRouter);

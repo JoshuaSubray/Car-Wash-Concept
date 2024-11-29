@@ -2,21 +2,35 @@ const express = require('express');
 const router = express.Router();
 const Appointment = require('../models/Appointment');
 
+const packagePrices = {
+    Basic: '19.99',
+    Business: '29.99',
+    Premium: '39.99',
+    Deluxe: '99.99',
+    VIP: '199.99',
+    Royal: '299.99',
+}
+
 /* GET appointments page. */
 router.get('/', function (req, res, next) {
     if (!req.isAuthenticated()) { // must be logged in to make an appointment.
         req.flash('error_msg', 'Please log in to book an appointment.');
         return res.redirect('/users/login');
     }
-    res.render('appointments', { title: 'Appointments' });
+
+    // get username and email from logged-in account to automatically fill-in form.
+    const username = req.user.username;
+    const email = req.user.email;
+
+    res.render('appointments', { title: 'Appointments', username, email });
 })
 
 // appointments page validation.
 router.post('/', async (req, res) => {
-    const { name, email, date, message } = req.body;
+    const { name, email, date, message, package } = req.body;
     let errors = [];
 
-    if (!name || !email || !date) {
+    if (!name || !email || !date || !package) {
         errors.push({ msg: 'Please enter all required fields' });
     }
 
@@ -26,21 +40,14 @@ router.post('/', async (req, res) => {
             name,
             email,
             date,
-            message
+            message,
+            package,
         });
-    } else {
-        try {
-            // Save the appointment to the database (assuming you have an Appointment model)
-            const newAppointment = new Appointment({ name, email, date, message });
-            await newAppointment.save();
-            req.flash('success_msg', 'Your appointment has been booked');
-            res.redirect('/appointments');
-        } catch (err) {
-            console.error('Error booking appointment:', err);
-            req.flash('error_msg', 'Error booking appointment');
-            res.redirect('/appointments');
-        }
     }
+
+    const price = packagePrices[package];
+    req.session.appointmentData = { name, email, date, message, package, price };
+    res.redirect('/payment');
 });
 
 module.exports = router;

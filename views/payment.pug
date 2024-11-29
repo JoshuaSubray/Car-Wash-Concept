@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    h1.text-center.text-primary Complete Payment
+    if success_msg
+        .alert.alert-success= success_msg
+    if error_msg
+        .alert.alert-danger= error_msg
+    form(action='/payment' method='POST' class='mt=4')
+        .form-group
+            label(for='userPayment') Total Bill: $#{totalPrice}.
+            p Price: $#{price}.
+            p Tax (#{tax}%): $#{taxPrice}.
+            input.form-control(type='text' id='userPayment' name='userPayment' placeholder='Enter the total price of your package.' required)
+        button.btn.btn-primary(type='submit') Confirm Payment
