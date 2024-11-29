@@ -1,71 +1,79 @@
-//- extends layout
-
-//- block content
-//-   if success_msg
-//-     .alert.alert-success= success_msg
-
-//-   h1(style='font-size: 30px;')= title
-//-   p(style='font-size: 30px;') Welcome to JAJ Car Wash
-
-//-   // Basic attractive text for the car wash
-//-   p(style='font-size: 30px;') We offer a fast, affordable, and eco-friendly car wash service that will make your car shine like new!
-
-//-   // Call-to-action to book an appointment
-//-   p(style='font-size: 30px;') Get your car cleaned today!
-//-   a(href='/appointments' style='font-size: 30px;') Book an Appointment
-
-//-   p(style='font-size: 30px;') Get your car cleaned today!
-//-   a(href='/prices' style='font-size: 30px;') prices
-
-//-   p(style='font-size: 30px;') Get your car cleaned today!
-//-   a(href='/register' style='font-size: 30px;') register
-
-//-   p(style='font-size: 30px;') Get your car cleaned today!
-//-   a(href='/login' style='font-size: 30px;') login
-  
-//-   p(style='font-size: 30px;') Get your car cleaned today!
-//-   a(href='/contact' style='font-size: 30px;') contact
-
-//-   p(style='font-size: 30px;') Get your car cleaned today!
-//-   a(href='/about' style='font-size: 30px;') Want to know more about us and what we do?
-
-
 extends layout
 
 block content
-  // Link to the external CSS file (index.css)
-  link(rel='stylesheet', href='../public/stylesheets/index.css')
+  div(style='background-color: #ff9900;')
+    // Header Section
+    header.hero(style='background-image: url("/images/carwash-hero.jpg"); background-size: cover; background-position: center; height: 400px; position: relative;')
+      .overlay(style='background: rgba(0, 0, 0, 0.5); position: absolute; top: 0; left: 0; right: 0; bottom: 0;')
+        nav.navbar(style='display: flex; justify-content: space-around; padding: 20px;')
+          ul.navbar-list(style='list-style: none; display: flex; gap: 20px;')
+            li.nav-item
+              a.nav-link(href='/', style='color: white; text-decoration: none;') Home
+            li.nav-item
+              a.nav-link(href='/services', style='color: white; text-decoration: none;') Services
+            li.nav-item
+              a.nav-link(href='/prices', style='color: white; text-decoration: none;') Pricing
+            li.nav-item
+              a.nav-link(href='/about', style='color: white; text-decoration: none;') About Us
+            li.nav-item
+              a.nav-link(href='/contact', style='color: white; text-decoration: none;') Contact Us
 
-  // Display success message if available
-  if success_msg
-    .alert.alert-success= success_msg
+        .hero-content(style='position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white;')
+          h1.title(style='font-size: 48px; margin-bottom: 20px;') Premium Car Wash Services
+          p.subtitle(style='font-size: 24px; margin-bottom: 20px;') Making Your Car Shine Inside and Out
+          a.btn-primary(href='/appointments', style='background: #ff9900; padding: 10px 20px; color: white; text-decoration: none; border-radius: 5px;') Book Your Wash Today
 
-  // Main Title
-  h1 Welcome to JAJ Car Wash
+    // Services Section
+    section.services(style='padding: 50px 20px; background: #f9f9f9;')
+      h2.section-title(style='text-align: center; font-size: 36px; margin-bottom: 40px;') Our Services
+      .service-grid(style='display: flex; justify-content: space-around;')
+        .service-item(style='text-align: center; width: 30%;')
+          img(src='/images/exterior-wash.jpg', alt='Exterior Wash', style='width: 100%; border-radius: 10px;')
+          h3.service-title(style='font-size: 24px; margin-top: 20px;') Exterior Wash
+          p Keep your car’s exterior spotless and shining.
+        .service-item(style='text-align: center; width: 30%;')
+          img(src='/images/interior-cleaning.jpg', alt='Interior Cleaning', style='width: 100%; border-radius: 10px;')
+          h3.service-title(style='font-size: 24px; margin-top: 20px;') Interior Cleaning
+          p Deep cleaning for a fresh and comfortable ride.
+        .service-item(style='text-align: center; width: 30%;')
+          img(src='/images/full-service.jpg', alt='Full Service', style='width: 100%; border-radius: 10px;')
+          h3.service-title(style='font-size: 24px; margin-top: 20px;') Full Service
+          p Comprehensive care for your car inside and out.
 
-  // Basic attractive text for the car wash
-  p We offer a fast, affordable, and eco-friendly car wash service that will make your car shine like new!
+    // Testimonials Section
+    section.testimonials(style='padding: 50px 20px; background: #fff;')
+      h2.section-title(style='text-align: center; font-size: 36px; margin-bottom: 40px;') What Our Customers Say
+      .testimonials-carousel(style='display: flex; justify-content: space-around;')
+        .testimonial(style='width: 45%; text-align: center;')
+          p "Fantastic service! My car looks like new. Highly recommend!"
+          span.customer-name(style='display: block; margin-top: 10px; font-weight: bold;') - John D.
+        .testimonial(style='width: 45%; text-align: center;')
+          p "Quick and affordable. I’ll definitely come back."
+          span.customer-name(style='display: block; margin-top: 10px; font-weight: bold;') - Sarah W.
 
-  // Book an appointment link
-  p
-    a(href='/appointments') Book an Appointment
+    // Call-to-Action Section
+    section.cta(style='padding: 50px 20px; background: #ff9900; text-align: center; color: white;')
+      h2 Ready for a Shine?
+      a.btn-primary(href='/appointments', style='background: white; padding: 10px 20px; color: #ff9900; text-decoration: none; border-radius: 5px;') Book an Appointment
 
-  // Prices link
-  p
-    a(href='/prices') View Prices
-
-  // Register link
-  p
-    a(href='/register') Register for Our Services
-
-  // Login link
-  p
-    a(href='/login') Login to Your Account
-  
-  // Contact link
-  p
-    a(href='/contact') Contact Us
-
-  // About Us link
-  p
-    a(href='/about') Want to know more about us and what we do?
+    // Footer Section
+    footer.footer(style='padding: 50px 20px; background: #333; color: white;')
+      .footer-content(style='display: flex; justify-content: space-around;')
+        .footer-column(style='width: 30%;')
+          h3 Contact Us
+          p 123 Main St, Anytown, USA
+          p (123) 456-7890
+          p info@jajcarwash.com
+        .footer-column(style='width: 30%;')
+          h3 Quick Links
+          ul(style='list-style: none; padding: 0;')
+            li: a(href='/services', style='color: white; text-decoration: none;') Services
+            li: a(href='/prices', style='color: white; text-decoration: none;') Pricing
+            li: a(href='/about', style='color: white; text-decoration: none;') About Us
+            li: a(href='/contact', style='color: white; text-decoration: none;') Contact Us
+        .footer-column(style='width: 30%;')
+          h3 Follow Us
+          a.social-icon(href='https://facebook.com', style='color: white; text-decoration: none; display: block; margin-bottom: 10px;') Facebook
+          a.social-icon(href='https://instagram.com', style='color: white; text-decoration: none; display: block; margin-bottom: 10px;') Instagram
+          a.social-icon(href='https://twitter.com', style='color: white; text-decoration: none; display: block; margin-bottom: 10px;') Twitter
+      p.footer-bottom(style='text-align: center; margin-top: 20px;') &copy; #{new Date().getFullYear()} JAJ Car Wash. All rights reserved.

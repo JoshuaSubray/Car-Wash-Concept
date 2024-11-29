@@ -1,25 +1,30 @@
 extends layout
 
 block content
-  h1.text-center.text-primary Your Profile
+  section.profile-container
+    h1.text-center.text-primary.mb-4(style='font-size: 36px;') Your Profile
 
-  h2.text-center.mt-5 Welcome, #{user.username}
-  p.text-center.mt-5 Email: #{user.email}
-  h3.text-center.mt-5 Your Appointments
-  if appointments.length
-    table.table.table-striped
-      thead
-        tr
-          th Name
-          th Email
-          th Date
-          th Message
-      body
-        each appointment in appointments
-          tr
-            td= appointment.name
-            td= appointment.email
-            td= appointment.date.toDateString()
-            td= appointment.message
-  else
-    p.text-center.mt-4 You have no appointments booked.
+    .profile-header.text-center
+      h2.mt-5(style='font-size: 28px; color: #007bff;') Welcome, #{user.username}
+      p.mt-2(style='font-size: 18px; color: #6c757d;') Email: #{user.email}
+
+    h3.text-center.mt-5(style='font-size: 24px;') Your Appointments
+
+    if appointments.length
+      .table-responsive.mt-4
+        table.table.table-striped.table-bordered.text-center
+          thead.table-dark
+            tr
+              th Name
+              th Email
+              th Date
+              th Message
+          tbody
+            each appointment in appointments
+              tr
+                td= appointment.name
+                td= appointment.email
+                td= appointment.date.toDateString()
+                td= appointment.message
+    else
+      p.text-center.text-muted.mt-4(style='font-size: 18px;') You have no appointments booked.
