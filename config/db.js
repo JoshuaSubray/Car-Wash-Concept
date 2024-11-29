@@ -5,8 +5,7 @@ remove the urlParser and unifiedTopology warnings.
 */
 
 // Database Connection.
-// const url = 'mongodb+srv://jamesgriffiths23:1054g087@central.r9mof.mongodb.net/userAuth';
-const url = 'mongodb+srv://N01645357:vNTX679I1r7tAzj8@cluster.ohskr.mongodb.net';
+const url = 'mongodb+srv://jamesgriffiths23:1054g087@central.r9mof.mongodb.net';
 
 // Primary Database Connection.
 const urlAuth = url + '/userAuth';
