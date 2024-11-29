@@ -1,3 +1,5 @@
+include layout
+
 doctype html
 html
   head
@@ -43,32 +45,6 @@ html
       }
 
   body
-    //- Navbar
-    nav.navbar.navbar-expand-lg.navbar-light.bg-light
-      a.navbar-brand(href='/') JAJ Car Wash
-      button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
-        span.navbar-toggler-icon
-      .collapse.navbar-collapse#navbarNav
-        ul.navbar-nav.ml-auto
-          li.nav-item
-            a.nav-link(href='/about') About
-          li.nav-item
-            a.nav-link(href='/prices') Prices
-          li.nav-item
-            a.nav-link(href='/reviews') Reviews
-          li.nav-item
-            a.nav-link(href='/contact').mr-3 Contact
-          li.nav-item
-            a.nav-link(href='/appointments').mr-3 Appointments
-          if !user
-            li.nav-item
-              a.nav-link(href='/users/login') Login
-            li.nav-item
-              a.nav-link(href='/users/register') Register
-          else
-            li.nav-item
-              a.nav-link(href='/users/logout') Logout
-
     header
       h1 About Our Company
     .container
