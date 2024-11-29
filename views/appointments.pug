@@ -2,10 +2,13 @@ extends layout
 
 block content
   h1.text-center.text-primary Book Your Car Wash Appointment
+
   if success_msg
     .alert.alert-success= success_msg
   if error_msg
     .alert.alert-danger= error_msg
+
+  // Appointment Booking Form
   form(action='/appointments' method='POST' class='mt-4')
     .form-group
       label(for='name') Name
@@ -20,3 +23,21 @@ block content
       label(for='message') Additional Information
       textarea.form-control(id='message' name='message' rows='4' placeholder='Any special requests or information')
     button.btn.btn-primary(type='submit') Book Appointment
+
+  // Dropdown for User Appointments
+  h2.text-center.text-secondary.mt-5 Your Appointments
+  .dropdown.text-center
+    button.btn.btn-secondary.dropdown-toggle(type='button' id='appointmentsDropdown' data-bs-toggle='dropdown' aria-expanded='false')
+      Show Appointments
+    ul.dropdown-menu(aria-labelledby='appointmentsDropdown')
+      if appointments && appointments.length > 0
+        each appointment in appointments
+          li.dropdown-item
+            p.text-primary= 'Date: ' + appointment.date
+            p.text-muted= 'Name: ' + appointment.name
+            p.text-muted= 'Email: ' + appointment.email
+            if appointment.message
+              p.text-muted= 'Message: ' + appointment.message
+            hr
+      else
+        li.dropdown-item No appointments found.
