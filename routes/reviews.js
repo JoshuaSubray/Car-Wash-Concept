@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     return res.redirect('/users/login');
   }
 
-  res.render('reviews', { reviews: Reviews });
+  res.render('reviews', { reviews: reviews });
 });
 
 // POST route to handle review submission.
