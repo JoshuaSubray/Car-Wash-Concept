@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { User, UserLogin } = require('../models/User');
+const { User, UserLogin } = require('../models/User'); // Ensure this path is correct
 const Appointment = require('../models/Appointment');
 const passport = require('passport');
 
