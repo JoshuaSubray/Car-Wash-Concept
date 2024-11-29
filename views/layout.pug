@@ -1,67 +1,14 @@
-//- doctype html
-//- html
-//-   head
-//-     title JAJ Car Wash
-//-     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css')
-//-     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css')
-//-   body
-//-     nav.navbar.navbar-expand-lg.navbar-light.bg-light
-//-       a.navbar-brand(href='/') JAJ Car Wash
-//-       if user
-//-         a.navbar-brand.ml-5 Welcome, #{user.username}!
-//-       .collapse.navbar-collapse#navbarNav
-//-         ul.navbar-nav.ml-auto
-//-           li.nav-item
-//-             a.nav-link(href='/about').mr-3 About
-//-           li.nav-item
-//-             a.nav-link(href='/prices').mr-3 Prices
-//-           li.nav-item
-//-             a.nav-link(href='/reviews').mr-3 Reviews
-//-           li.nav-item
-//-             a.nav-link(href='/appointments').mr-3 Book Appointment
-//-           if !user
-//-             li.nav-item
-//-               a.nav-link(href='/users/login').mr-3 Login
-//-             li.nav-item
-//-               a.nav-link(href='/users/register').mr-3 Register
-//-           else
-//-             li.nav-item
-//-               a.nav-link(href='/users/profile') Profile
-//-               a.nav-link(href="bi bi-file-person-fill") 
-//-             li.nav-item
-//-               a.nav-link(href='/users/logout') Logout
-//-     .container
-//-       if success_msg
-//-         .alert.alert-success= success_msg
-//-       if error_msg
-//-         .alert.alert-danger= error_msg
-//-       block content
-
-
-//- //https://icons.getbootstrap.com
-
 doctype html
 html
   head
     title JAJ Car Wash
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    
-    // Bootstrap CSS
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css')
-    // Bootstrap Icons
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css')
-    // Custom CSS (Ensure layout.css contains button styles)
-    link(rel='stylesheet', href='/stylesheets/layout.css')
-
   body
-    // Navbar
     nav.navbar.navbar-expand-lg.navbar-light.bg-light
       a.navbar-brand(href='/') JAJ Car Wash
       if user
         a.navbar-brand.ml-5 Welcome, #{user.username}!
-      button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarNav", aria-controls="navbarNav", aria-expanded="false", aria-label="Toggle navigation")
-        span.navbar-toggler-icon
       .collapse.navbar-collapse#navbarNav
         ul.navbar-nav.ml-auto
           li.nav-item
@@ -79,19 +26,16 @@ html
               a.nav-link(href='/users/register').mr-3 Register
           else
             li.nav-item
-              a.nav-link(href='/users/profile').mr-3
-                i(class="bi bi-person-circle") Profile
+              a.nav-link(href='/users/profile') Profile
+              a.nav-link(href="bi bi-file-person-fill") 
             li.nav-item
-              a.nav-link(href='/users/logout').mr-3
-                i(class="bi bi-box-arrow-right") Logout
-    .container.mt-4
+              a.nav-link(href='/users/logout') Logout
+    .container
       if success_msg
         .alert.alert-success= success_msg
       if error_msg
         .alert.alert-danger= error_msg
       block content
 
-    // Bootstrap JS + Popper.js
-    script(src='https://code.jquery.com/jquery-3.6.0.min.js', integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+5hb7U1lvE4I2pBMEgAG1MeFdhJl4WBCrkuwzOn", crossorigin="anonymous")
-    script(src='https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js', integrity="sha384-eMN6PbPpcklnt+zFVPOxRp8lhyHoFkT8Zy4RXTVrvtD/ABJPzzOe4nG4u8p8fAvj", crossorigin="anonymous")
-    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js')
+
+//https://icons.getbootstrap.com
