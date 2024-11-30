@@ -33,7 +33,7 @@ router.post('/', async (req, res) => {
     }
     try {
         // save the appointment to the database.
-        const newAppointment = new Appointment({ name, email, date, message, package, price });
+        const newAppointment = new Appointment({ name, email, date, message, package, price: totalPrice });
         await newAppointment.save();
         req.flash('success_msg', 'Your appointment has been booked! View your ticket in your Profile.');
         req.session.appointmentDate = null; // clear appointment data after saving.
