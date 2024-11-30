@@ -21,6 +21,7 @@ block content
               th Package
               th Price
               th Message
+              th Action
           tbody
             each appointment in appointments
               tr
@@ -30,6 +31,9 @@ block content
                 td= appointment.package
                 td= appointment.price
                 td= appointment.message || 'N/A'
+                td
+                  form(action=`/appointments/${appointment._id}/cancel` method='POST')
+                    button.btn.btn-danger(type='submit') Cancel Appointment 
 
     else
       p.text-center.text-muted.mt-4(style='font-size: 18px;') You have no appointments booked.

@@ -49,6 +49,17 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter); // Ensure this line is present
 app.use('/reviews', reviewsRouter); // Add the reviews route
 
+app.post('/appointments/:id/cancel', async (req, res) => {
+  try {
+    await Appointment.findByIdAndDelete(req.params.id);
+    req.flash('success_msg', 'Appointment canceled successfully.');
+    res.redirect('/profile');
+  } catch (err) {
+    req.flash('error_msg', 'Failed to cancel appointment.');
+    res.redirect('/profile');
+  }
+});
+
 // catch error 404 and forward to error handler.
 app.use(function(req, res, next) {
   next(createError(404));
