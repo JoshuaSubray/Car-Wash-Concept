@@ -6,11 +6,6 @@ let reviews = [];
 
 /* GET reviews page. */
 router.get('/', (req, res) => {
-  if (!req.isAuthenticated()) { // must be logged in to make an review.
-    req.flash('error_msg', 'Please log in to make a review.');
-    return res.redirect('/users/login');
-  }
-
   res.render('reviews', { reviews: reviews });
 });
 
