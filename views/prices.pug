@@ -4,6 +4,10 @@ block content
   div(style='background-color: #ff9900; padding: 20px;')
     if success_msg
       .alert.alert-success= success_msg
+      //- .alert.alert-success(role='alert')= success_msg
+
+    //- if error_msg
+    //-   .alert.alert-danger(role='alert')= error_msg
 
     // Page Title
     h1(style='font-size: 48px; text-align: center; color: white;') Our Pricing Plans
