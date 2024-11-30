@@ -8,7 +8,7 @@ var flash = require('connect-flash');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var reviewsRouter = require('./routes/reviews'); // Import the reviews route
-var passport = require('./config/passport'); 
+var passport = require('./config/passport');
 const Appointment = require('./models/Appointment');
 var app = express();
 
@@ -36,7 +36,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // make flash messages and user object available in all views.
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
@@ -53,20 +53,20 @@ app.post('/appointments/:id/cancel', async (req, res) => {
   try {
     await Appointment.findByIdAndDelete(req.params.id);
     req.flash('success_msg', 'Appointment canceled successfully.');
-    res.redirect('/profile');
+    res.redirect('/users/profile');
   } catch (err) {
     req.flash('error_msg', 'Failed to cancel appointment.');
-    res.redirect('/profile');
+    res.redirect('/users/profile');
   }
 });
 
 // catch error 404 and forward to error handler.
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler.
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development.
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -79,7 +79,7 @@ app.use(function(err, req, res, next) {
 // port.
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-    console.log(`Open your browser at 'http://localhost:${port}'.`);
+  console.log(`Open your browser at 'http://localhost:${port}'.`);
 });
 
 module.exports = app;

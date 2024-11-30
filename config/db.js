@@ -17,8 +17,6 @@ mongoose.connect(urlAuth, { useNewUrlParser: true, useUnifiedTopology: true })
 const urlLogin = url + 'userlogins';
 const loginConnection = mongoose.createConnection(urlLogin, { useNewUrlParser: true, useUnifiedTopology: true });
 
-
-
 loginConnection.on('connected', () => console.log('Connected to MongoDB Login.'));
 loginConnection.on('error', err => console.error('Error connecting to Login MongoDB.', err));
 
