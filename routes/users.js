@@ -5,7 +5,7 @@ const Appointment = require('../models/Appointment');
 const passport = require('passport');
 
 /* GET register page. */
-router.get('/register', function(req, res, next) {
+router.get('/register', function (req, res, next) {
   res.render('register', { title: 'Register' });
 });
 
@@ -49,7 +49,7 @@ router.post('/register', async (req, res) => {
 });
 
 /* GET login page. */
-router.get('/login', function(req, res, next) {
+router.get('/login', function (req, res, next) {
   res.render('login', { title: 'Login' });
 });
 
@@ -86,7 +86,15 @@ router.get('/profile', async (req, res) => {
     return res.redirect('/users/login');
   }
   try {
-    const appointments = await Appointment.find({ email: req.user.email });
+    let appointments = [];
+
+    // if user's account type is admin, all appointments are viewable.
+    if (req.user.type === 'admin') {
+      appointments = await Appointment.find().sort({ date: 1 });
+    } else { // if user's account type is customer, only their appointments are viewable.
+      appointments = await Appointment.find({ email: req.user.email }).sort({ date: 1 });
+    }
+
     res.render('profile', { title: 'Your Profile', user: req.user, appointments });
   } catch (err) {
     console.error('Error fetching appointments:', err);

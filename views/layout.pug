@@ -8,7 +8,10 @@ html
     nav.navbar.navbar-expand-lg.navbar-light.bg-light
       a.navbar-brand(href='/') JAJ Car Wash
       if user
-        a.navbar-brand.ml-5 Welcome, #{user.username}!
+        if user.type === 'admin'
+          a.navbar-brand.ml-5 Welcome, Admin #{user.username}!
+        else
+          a.navbar-brand.ml-5 Welcome, #{user.username}!
       .collapse.navbar-collapse#navbarNav
         ul.navbar-nav.ml-auto
           li.nav-item

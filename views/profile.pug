@@ -2,38 +2,78 @@ extends layout
 
 block content
   section.profile-container
-    h1.text-center.text-primary.mb-4(style='font-size: 36px;') Your Profile
-
+    if user
+      //- admin specific text.
+      if user.type === 'admin'
+        h1.text-center.text-primary.mb-4(style='font-size: 36px;') Admin Interface
+        .profile-header.text-center
+          h2.mt-5(style='font-size: 28px; color: #007bff;') Welcome, Admin #{user.username}!
+      //- customer specific text.
+      else
+        h1.text-center.text-primary.mb-4(style='font-size: 36px;') Your Profile
+        .profile-header.text-center
+          h2.mt-5(style='font-size: 28px; color: #007bff;') Welcome, #{user.username}!
     .profile-header.text-center
-      h2.mt-5(style='font-size: 28px; color: #007bff;') Welcome, #{user.username}!
       p.mt-2(style='font-size: 18px; color: #6c757d;') Email: #{user.email}
 
-    h3.text-center.mt-5(style='font-size: 24px;') Your Appointments
+      //- admin can view and manage all appointments.
+      if user.type === 'admin'
+        h3.text-center.mt-5(style='font-size: 24px;') Appointment Manager
+        if appointments.length
+          .table-responsive.mt-4
+            table.table.table-striped.table-bordered.text-center
+              thead.table-dark
+                tr
+                  th Name
+                  th Email
+                  th Date
+                  th Package
+                  th Price
+                  th Message
+                  th Action
+              tbody
+                each appointment in appointments
+                  tr
+                    td= appointment.name
+                    td= appointment.email
+                    td= appointment.date.toDateString()
+                    td= appointment.package
+                    td= appointment.price
+                    td= appointment.message || 'N/A'
+                    td
+                      form(action=`/appointments/${appointment._id}/cancel` method='POST')
+                        button.btn.btn-danger(type='submit') Set Complete & Delete Appointment
 
-    if appointments.length
-      .table-responsive.mt-4
-        table.table.table-striped.table-bordered.text-center
-          thead.table-dark
-            tr
-              th Name
-              th Email
-              th Date
-              th Package
-              th Price
-              th Message
-              th Action
-          tbody
-            each appointment in appointments
-              tr
-                td= appointment.name
-                td= appointment.email
-                td= appointment.date.toDateString()
-                td= appointment.package
-                td= appointment.price
-                td= appointment.message || 'N/A'
-                td
-                  form(action=`/appointments/${appointment._id}/cancel` method='POST')
-                    button.btn.btn-danger(type='submit') Cancel Appointment 
+        else
+          p.text-center.text-muted.mt-4(style='font-size: 18px;') No appointments available.
 
-    else
-      p.text-center.text-muted.mt-4(style='font-size: 18px;') You have no appointments booked.
+      //- user can view only their appointments.
+      else
+        h3.text-center.mt-5(style='font-size: 24px;') Your Appointments
+        if appointments.length
+          .table-responsive.mt-4
+            table.table.table-striped.table-bordered.text-center
+              thead.table-dark
+                tr
+                  th Name
+                  th Email
+                  th Date
+                  th Package
+                  th Price
+                  th Message
+                  th Action
+              tbody
+                each appointment in appointments
+                  tr
+                    td= appointment.name
+                    td= appointment.email
+                    td= appointment.date.toDateString()
+                    td= appointment.package
+                    td= appointment.price
+                    td= appointment.message || 'N/A'
+                    td
+                      form(action=`/appointments/${appointment._id}/cancel` method='POST')
+                        button.btn.btn-danger(type='submit') Cancel Appointment 
+
+        else
+          p.text-center.text-muted.mt-4(style='font-size: 18px;') You have no appointments booked.
