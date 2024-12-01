@@ -1,63 +1,127 @@
-include layout
+extends layout
 
-doctype html
-html
+block content
+
   head
-    title About Us
+    title About Us | JAJ Car Wash
     style.
       body {
-        font-family: Arial, sans-serif;
-        line-height: 1.6;
+        font-family: 'Arial', sans-serif;
         margin: 0;
         padding: 0;
-        background-color: #f4f4f4;
+        background-color: orange;
+        color: #333;
+      }
+      header {
+        background: black;
+        color: #fff;
+        text-align: center;
+        padding: 40px 0;
+        border-bottom: 3px solid #fff;
+      }
+      header h1 {
+        font-size: 2.5rem;
+        text-transform: uppercase;
+        margin: 0;
       }
       .container {
         width: 80%;
-        margin: auto;
-        overflow: hidden;
-      }
-      header {
-        background: #333;
-        color: #fff;
-        padding-top: 30px;
-        min-height: 70px;
-        border-bottom: #77aaff 3px solid;
-      }
-      header h1 {
-        text-align: center;
-        text-transform: uppercase;
-        margin: 0;
+        margin: 0 auto;
+        padding: 20px;
       }
       section {
         padding: 20px;
         margin: 20px 0;
         background: #fff;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease;
+      }
+      section:hover {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+      }
+      h2 {
+        font-size: 1.8rem;
+        color: black;
+        margin-bottom: 10px;
+      }
+      p {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #666;
+      }
+      .team-member {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+      }
+      .team-member img {
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        margin-right: 20px;
+        object-fit: cover;  
+
       }
       footer {
         background: #333;
         color: #fff;
         text-align: center;
-        padding: 10px;
-        margin-top: 20px;
+        padding: 15px;
+        margin-top: 40px;
+      }
+      footer a {
+        color: #fff;
+        text-decoration: none;
+      }
+      footer a:hover {
+        text-decoration: underline;
+      }
+      @media (max-width: 768px) {
+        .container {
+          width: 90%;
+        }
+        .team-member {
+          flex-direction: column;
+          align-items: center;
+        }
       }
 
   body
     header
-      h1 About Our Company
+      h1 About JAJ Car Wash
+
     .container
       section
         h2 Our Mission
-        p Our mission is to deliver high-quality products that bring value to our customers.
+        p We are dedicated to providing fast, eco-friendly, and affordable car wash services. Our goal is to make your car shine like new while being mindful of our planet.
+
       section
         h2 Our Vision
-        p We envision a world where our solutions make life easier and more enjoyable.
+        p Our vision is to set the standard for car care by delivering exceptional service and environmentally conscious solutions to every customer we serve.
+
+      section
+        h2 Our Values
+        p We believe in transparency, honesty, and excellence. We strive to build lasting relationships with our customers based on trust, quality, and mutual respect.
+
       section
         h2 Our Team
-        p Our team consists of dedicated professionals who are passionate about what they do.
+        .team-member
+          img(src='/images/james.jpg', alt='James ')
+          div
+            h3 James Griffiths
+            p.mr-4 Team Lead
+        .team-member
+          img(src='/images/team-member2.jpg', alt='Aaron')
+          div
+            h3 Aaron Laoshe
+            p.mr-4 Car Care Specialist
+        .team-member
+          img(src='/images/team-member3.jpg', alt='Joshua')
+          div
+            h3 Joshua Subray
+            p.mr-4 Customer Service Manager
 
     footer
-      p &copy; 2023 JAJ Car Wash. All rights reserved.
-
+      p &copy; 2023 JAJ Car Wash. All rights reserved. | 
+      a(href='/contact') Contact Us

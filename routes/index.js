@@ -22,6 +22,8 @@ router.use('/payment', paymentRouter);
 const reviewsRouter = require('./reviews');
 router.use('/reviews', reviewsRouter);
 
+
+
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('index', { title: 'Welcome to JAJ Car Wash' });
