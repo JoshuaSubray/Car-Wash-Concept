@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const Review = require('../models/Reviews')
 
 // In-memory storage for reviews (replace with a database in production).
 let reviews = [];
