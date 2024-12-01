@@ -21,9 +21,9 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   if (!req.isAuthenticated()) {
     req.flash('error_msg', "Can't have no anonymous reviews, log in please.")
-    return res.redirect('../views/login.pug')
+    return res.redirect('/users/login')
   }
-  
+
   const { name, review } = req.body;
 
   if(!name || !review) {
