@@ -48,6 +48,7 @@ app.use(function (req, res, next) {
 app.use('/', indexRouter);
 app.use('/users', usersRouter); // Ensure this line is present
 app.use('/reviews', reviewsRouter); // Add the reviews route
+app.use('/contact', indexRouter); // Ensure the contact route is included
 
 app.post('/appointments/:id/cancel', async (req, res) => {
   try {
