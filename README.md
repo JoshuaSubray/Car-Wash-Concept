@@ -1,4 +1,8 @@
 # Project-CW
 Due: December 11th.
 
-//https://icons.getbootstrap.com
+npm install 
+
+To start app:
+macOS: sudo node app.js
+Windows: node app.js 
