@@ -2,10 +2,13 @@ extends layout
 
 block content
   // Alert Section
-  if alerts
-    each alert in alerts
-      .alert(class=alert.type, style='padding: 10px; margin-bottom: 10px;')
-        p= alert.message
+  if success_msg
+    .alert.alert-success
+        p= success_msg
+
+  if error_msg
+    .alert.alert-danger
+        p= error_msg
 
   form(action='/appointments' method='POST' class='mt-4' style='background-color: orange; padding: 20px; border-radius: 10px;')
     h1.text-center.margin-center(style='color: white;') Book Your Car Wash Appointment

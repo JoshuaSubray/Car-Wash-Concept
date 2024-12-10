@@ -41,16 +41,11 @@ router.post('/', async (req, res) => {
         errors.push({ msg: 'Please enter all required fields' });
     }
 
-    if (errors.length > 0) {
-        res.render('appointments', {
-            errors,
-            name,
-            email,
-            date,
-            message,
-            package,
-        });
+    if (!name || !email || !date || !package) {
+        req.flash('error_msg', 'Please enter all required fields.');
+        return res.redirect('/appointments');
     }
+    
 
     const price = packagePrices[package];
     req.session.appointmentData = { name, email, date, message, package, price };

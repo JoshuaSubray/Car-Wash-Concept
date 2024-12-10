@@ -18,10 +18,14 @@ block content
                             img(src='/images/discover.jpg' alt='Discover' class='mx-2' width='50')
 
                         // Alert Section
-                        if alerts
-                            each alert in alerts
-                                .alert(class=alert.type, style='padding: 10px; margin-bottom: 10px;')
-                                    p= alert.message
+                        if success_msg
+                            .alert.alert-success(style='padding: 10px; margin-bottom: 10px;')
+                                p= success_msg
+
+                        if error_msg
+                            .alert.alert-danger(style='padding: 10px; margin-bottom: 10px;')
+                                p= error_msg
+
 
                         form(action='/payment' method='POST' class='mt-4')
                             .form-group
