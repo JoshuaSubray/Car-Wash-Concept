@@ -36,7 +36,9 @@ block content
                   tr
                     td= appointment.name
                     td= appointment.email
-                    td= appointment.date.toDateString()
+                    //- td= appointment.date.toDateString()
+                    td= appointment.date.toLocaleString()
+
                     td= appointment.package
                     td= appointment.price
                     td= appointment.message || 'N/A'
@@ -77,3 +79,23 @@ block content
 
         else
           p.text-center.text-muted.mt-4(style='font-size: 18px;') You have no appointments booked.
+    h3.text-center.mt-5(style='font-size: 24px;') Your Reviews
+    if reviews && reviews.length > 0
+      .table-responsive.mt-4
+        table.table.table-striped.table-bordered.text-center
+          thead.table-dark
+            tr
+              th Review
+              th Name
+              th Date
+              th Email
+            tbody
+              each review in reviews
+                tr
+                  td(style='font-style: italic;') "#{review.review}"
+                  td= review.name
+                  //- td= review.date.toDateString()
+                  td= review.date.toLocaleString()
+                  td= review.email
+    else
+      p.text-center.text-muted.mt-4(style='font-size: 18px;') You have not left any reviews yet.

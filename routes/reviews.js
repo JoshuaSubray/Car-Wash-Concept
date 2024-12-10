@@ -24,15 +24,16 @@ router.post('/', async (req, res) => {
     return res.redirect('/users/login')
   }
 
-  const { name, review } = req.body;
+  const { name, email, review } = req.body;
+  // let errors = [];
 
-  if(!name || !review) {
-    req.flash('error_msg', "you forgot either your name or review lol");
+  if(!name || !email || !review) {
+    req.flash('error_msg', "you forgot either your name or review or email lol");
     return res.redirect('/reviews')
   }
 
   try {
-    const newReview = new Review({name, review})
+    const newReview = new Review({name, email, review})
     await newReview.save();
 
   // Save the review in memory (or replace this with a database logic).

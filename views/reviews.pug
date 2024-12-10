@@ -16,6 +16,7 @@ block content
             .review-box(style='background: white; padding: 20px; border-radius: 10px; width: 45%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);')
               p(style='font-style: italic;')= '"' + review.review + '"'
               p(style='text-align: right; font-weight: bold; margin-top: 10px;')= '- ' + review.name
+              //- p(style='text-align: right, font-size: 0.9rem; color: #6c717d;') Email: #{review.email}
               p(style='text-align: right, font-size: 0.9rem; color: #6c717d;') From: #{new Date(review.date).toLocaleString()}
         else
           p(style='text-align: center; color: white; font-size: 20px;') No reviews available.
@@ -27,6 +28,9 @@ block content
         .form-group
           label(for='name', style='font-weight: bold;') Your Name
           input#name.form-control(type='text', placeholder='Enter Your Name', name='name', required, style='margin-bottom: 10px;')
+        .form-group
+          label(for='email', style='font-weight: bold;') Your Email
+          input#email.form-control(type='email', placeholder='Enter Your Email', name='email', required, style='margin-bottom: 10px;')
         .form-group
           label(for='review', style='font-weight: bold;') Your Review
           textarea#review.form-control(placeholder='Enter Your Review', rows='5', name='review', required, style='margin-bottom: 10px;')
