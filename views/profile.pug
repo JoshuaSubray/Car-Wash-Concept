@@ -10,18 +10,18 @@ block content
           p= alert.message
 
     if user
-      // Dynamic Header Section with Greeting
-      .profile-header.text-center.mt-4
-        h1.text-primary.mb-4(style='font-size: 36px;')
-          if user.type === 'admin'
-            i.fa.fa-crown.text-warning.me-2
-            | Admin Dashboard
-          else
-            i.fa.fa-user-circle.text-info.me-2(style='orange')
-            | Your Profile
-        h2.mt-3(style='font-size: 28px; color: #007bff;')
-          | Welcome, #{user.username}!
-        p.mt-2(style='font-size: 18px; color: #6c757d;') Email: #{user.email}
+      //- admin specific text.
+      if user.type === 'admin'
+        h1.text-center.text-primary.mb-4(style='font-size: 36px;') Admin Interface
+        .profile-header.text-center
+          h2.mt-5(style='font-size: 28px; color: #007bff;') Welcome, Admin #{user.username}!
+      //- customer specific text.
+      else
+        h1.text-center.text-primary.mb-4(style='font-size: 36px;') Your Profile
+        .profile-header.text-center
+          h2.mt-5(style='font-size: 28px; color: #007bff;') Welcome, #{user.username}!
+    .profile-header.text-center
+      p.mt-2(style='font-size: 18px; color: #6c757d;') Email: #{user.email}
 
       // Admin Specific Section
       if user.type === 'admin'
@@ -43,7 +43,9 @@ block content
                   tr
                     td= appointment.name
                     td= appointment.email
-                    td= appointment.date.toDateString()
+                    //- td= appointment.date.toDateString()
+                    td= appointment.date.toLocaleString()
+
                     td= appointment.package
                     td= appointment.price
                     td= appointment.message || 'N/A'
@@ -88,7 +90,7 @@ block content
         else
           p.text-center.mt-4 No appointments found.
       else
-        h3.text-center.mt-5.text-primary(style='font-size: 24px;') Your Appointments
+        h3.text-center.mt-5(style='font-size: 24px;') Your Appointments
         if appointments.length
           .table-responsive.mt-4
             table.table.table-hover.table-striped.text-center
@@ -112,14 +114,7 @@ block content
                     td= appointment.message || 'N/A'
                     td
                       form(action=`/appointments/${appointment._id}/cancel` method='POST')
-                        button.btn.btn-outline-danger(type='submit' title='Cancel this Appointment')
-                          i.fa.fa-times-circle.me-2
-                          | Cancel
-        else
-          .alert.alert-warning.text-center.mt-4(style='font-size: 18px;') 
-            | You have no appointments booked.
+                        button.btn.btn-danger(type='submit') Cancel Appointment 
 
-  // Footer Message Section
-  footer.text-center.mt-5.pb-3
-    p(style='font-size: 14px; color: #6c757d;') 
-      | © #{new Date().getFullYear()} Your Company. All rights reserved.
+        else
+          p.text-center.text-muted.mt-4(style='font-size: 18px;') You have no appointments booked.

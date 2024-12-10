@@ -3,6 +3,7 @@ const router = express.Router();
 const { User, UserLogin } = require('../models/User');
 const Appointment = require('../models/Appointment');
 const passport = require('passport');
+const Reviews = require('../models/Reviews');
 
 /* GET register page. */
 router.get('/register', function (req, res, next) {
@@ -87,6 +88,7 @@ router.get('/profile', async (req, res) => {
   }
   try {
     let appointments = [];
+    let reviews = [];
 
     // if user's account type is admin, all appointments are viewable.
     if (req.user.type === 'admin') {
@@ -95,10 +97,12 @@ router.get('/profile', async (req, res) => {
       appointments = await Appointment.find({ email: req.user.email }).sort({ date: 1 });
     }
 
-    res.render('profile', { title: 'Your Profile', user: req.user, appointments });
+    reviews = await Reviews.find({ email: req.user.email }).sort({ date: -1 })
+
+    res.render('profile', { title: 'Your Profile', user: req.user, appointments, reviews });
   } catch (err) {
     console.error('Error fetching appointments:', err);
-    req.flash('error_msg', 'Error fetching appointments');
+    req.flash('error_msg', 'Error fetching appointments or reviews');
     res.redirect('/');
   }
 });
