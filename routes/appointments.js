@@ -22,7 +22,6 @@ router.get('/', function (req, res, next) {
     const username = req.user.username;
     const email = req.user.email;
 
-    // Get the package from query parameters
     const selectedPackage = req.query.package || ''; // Default to empty string if not provided
 
     res.render('appointments', { 
