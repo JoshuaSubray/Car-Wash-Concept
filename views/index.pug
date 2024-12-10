@@ -2,7 +2,12 @@ extends layout
 
 block content
   div(style='background-color: #ff9900;')
- 
+    // Alert Section
+    if alerts
+      each alert in alerts
+        .alert(class=alert.type, style='padding: 10px; margin-bottom: 10px;')
+          p= alert.message
+
     // Header Section
     header.hero(style='background-image: url("/images/carwash-hero.jpg"); background-size: cover; background-position: center; height: 400px; position: relative;')
       .overlay(style='background: rgba(0, 0, 0, 0.5); position: absolute; top: 0; left: 0; right: 0; bottom: 0;')

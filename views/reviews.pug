@@ -4,8 +4,11 @@ block content
   div(style='background-color: #ff9900; padding: 20px;')
     h1(style='text-align: center; color: white; margin-bottom: 20px;') Customer Reviews
 
-    if success_msg
-      .alert.alert-success(style='text-align: center;')= success_msg
+    // Alert Section
+    if alerts
+      each alert in alerts
+        .alert(class=alert.type, style='padding: 10px; margin-bottom: 10px; text-align: center;')
+          p= alert.message
 
     p(style='text-align: center; color: white; font-size: 20px;') Here's what our customers are saying about us!
 

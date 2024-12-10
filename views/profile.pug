@@ -1,27 +1,34 @@
 extends layout
 
 block content
-  section.profile-container
+  section.profile-container(style='border: 15px solid black;')
+    // Alert Section with Icon and Animation
+    if alerts
+      each alert in alerts
+        .alert(class=alert.type, style='padding: 10px; margin-bottom: 10px; animation: fadeIn 0.5s;')
+          i.fa(class=`fa-${alert.type === 'success' ? 'check-circle' : 'exclamation-circle'}`).me-2
+          p= alert.message
+
     if user
-      //- admin specific text.
-      if user.type === 'admin'
-        h1.text-center.text-primary.mb-4(style='font-size: 36px;') Admin Interface
-        .profile-header.text-center
-          h2.mt-5(style='font-size: 28px; color: #007bff;') Welcome, Admin #{user.username}!
-      //- customer specific text.
-      else
-        h1.text-center.text-primary.mb-4(style='font-size: 36px;') Your Profile
-        .profile-header.text-center
-          h2.mt-5(style='font-size: 28px; color: #007bff;') Welcome, #{user.username}!
-    .profile-header.text-center
-      p.mt-2(style='font-size: 18px; color: #6c757d;') Email: #{user.email}
+      // Dynamic Header Section with Greeting
+      .profile-header.text-center.mt-4
+        h1.text-primary.mb-4(style='font-size: 36px;')
+          if user.type === 'admin'
+            i.fa.fa-crown.text-warning.me-2
+            | Admin Dashboard
+          else
+            i.fa.fa-user-circle.text-info.me-2(style='orange')
+            | Your Profile
+        h2.mt-3(style='font-size: 28px; color: #007bff;')
+          | Welcome, #{user.username}!
+        p.mt-2(style='font-size: 18px; color: #6c757d;') Email: #{user.email}
 
-      //- admin can view and manage all appointments.
+      // Admin Specific Section
       if user.type === 'admin'
-        h3.text-center.mt-5(style='font-size: 24px;') Appointment Manager
+        h3.text-center.mt-5.text-primary(style='font-size: 24px;') Manage Appointments
         if appointments.length
           .table-responsive.mt-4
-            table.table.table-striped.table-bordered.text-center
+            table.table.table-hover.table-striped.text-center
               thead.table-dark
                 tr
                   th Name
@@ -42,17 +49,19 @@ block content
                     td= appointment.message || 'N/A'
                     td
                       form(action=`/appointments/${appointment._id}/cancel` method='POST')
-                        button.btn.btn-danger(type='submit') Set Complete & Delete Appointment
-
+                        button.btn.btn-outline-danger(type='submit' title='Complete and Delete Appointment')
+                          i.fa.fa-trash-alt.me-2
+                          | Set Complete
         else
-          p.text-center.text-muted.mt-4(style='font-size: 18px;') No appointments available.
+          .alert.alert-info.text-center.mt-4(style='font-size: 18px;') 
+            | No appointments available.
 
-      //- user can view only their appointments.
-      else
-        h3.text-center.mt-5(style='font-size: 24px;') Your Appointments
+      // User Specific Section
+      if user
+        h3.text-center.mt-5.text-primary(style='font-size: 24px;') Your Appointments
         if appointments.length
           .table-responsive.mt-4
-            table.table.table-striped.table-bordered.text-center
+            table.table.table-hover.table-striped.text-center
               thead.table-dark
                 tr
                   th Name
@@ -73,7 +82,44 @@ block content
                     td= appointment.message || 'N/A'
                     td
                       form(action=`/appointments/${appointment._id}/cancel` method='POST')
-                        button.btn.btn-danger(type='submit') Cancel Appointment 
-
+                        button.btn.btn-outline-danger(type='submit' title='Cancel this Appointment')
+                          i.fa.fa-times-circle.me-2
+                          | Cancel
         else
-          p.text-center.text-muted.mt-4(style='font-size: 18px;') You have no appointments booked.
+          p.text-center.mt-4 No appointments found.
+      else
+        h3.text-center.mt-5.text-primary(style='font-size: 24px;') Your Appointments
+        if appointments.length
+          .table-responsive.mt-4
+            table.table.table-hover.table-striped.text-center
+              thead.table-dark
+                tr
+                  th Name
+                  th Email
+                  th Date
+                  th Package
+                  th Price
+                  th Message
+                  th Action
+              tbody
+                each appointment in appointments
+                  tr
+                    td= appointment.name
+                    td= appointment.email
+                    td= appointment.date.toDateString()
+                    td= appointment.package
+                    td= appointment.price
+                    td= appointment.message || 'N/A'
+                    td
+                      form(action=`/appointments/${appointment._id}/cancel` method='POST')
+                        button.btn.btn-outline-danger(type='submit' title='Cancel this Appointment')
+                          i.fa.fa-times-circle.me-2
+                          | Cancel
+        else
+          .alert.alert-warning.text-center.mt-4(style='font-size: 18px;') 
+            | You have no appointments booked.
+
+  // Footer Message Section
+  footer.text-center.mt-5.pb-3
+    p(style='font-size: 14px; color: #6c757d;') 
+      | © #{new Date().getFullYear()} Your Company. All rights reserved.

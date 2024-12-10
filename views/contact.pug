@@ -1,18 +1,21 @@
 extends layout
 
 block content
-  if success_msg
-    .alert.alert-success= success_msg
-
-  // Page Title
-  h1(style='font-size: 48px; text-align: center;') Contact Us
-
-  // Page Introduction
-  p(style='font-size: 24px; text-align: center;') We would love to hear from you! If you have any questions, concerns, or feedback, feel free to reach out to us.
+  // Alert Section
+  if alerts
+    each alert in alerts
+      .alert(class=alert.type, style='padding: 10px; margin-bottom: 10px;')
+        p= alert.message
 
   // Contact Form
   .container
-    form(action='/contact', method='POST')
+    form(action='/contact', method='POST', style='background-color: orange; padding: 20px; border-radius: 10px;')
+      // Page Title
+      h1(style='font-size: 48px; text-align: center; color: white;') Contact Us
+
+      // Page Introduction
+      p(style='font-size: 24px; text-align: center; color: white' ) We would love to hear from you! If you have any questions, concerns, or feedback, feel free to reach out to us.
+
       .form-group
         label(for='name') Name
         input#name.form-control(type='text', placeholder='Enter Your Name', required)
@@ -22,7 +25,7 @@ block content
       .form-group
         label(for='message') Message
         textarea#message.form-control(placeholder='Enter Your Message', rows='5', required)
-      button.btn.btn-primary(type='submit') Submit
+      button.btn.btn-primary(type='submit', style='background-color: black; border: none;') Submit
 
   // Additional Contact Information (Optional)
   .container.mt-5
@@ -33,17 +36,4 @@ block content
     p(style='font-size: 18px; text-align: center;') 
       | Phone: (123) 456-7890
 
-  .container
-    h1 Contact Us
-    p If you have any questions, feel free to reach out to us.
-    form(action='/contact', method='post')
-      .form-group
-        label(for='name') Name
-        input#name.form-control(type='text', name='name', required)
-      .form-group
-        label(for='email') Email
-        input#email.form-control(type='email', name='email', required)
-      .form-group
-        label(for='message') Message
-        textarea#message.form-control(name='message', rows='5', required)
-      button.btn.btn-primary(type='submit') Send Message
+

@@ -44,6 +44,11 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.use((req, res, next) => {
+  res.locals.alerts = req.flash('alert') || [];
+  next();
+});
+
 // router.
 app.use('/', indexRouter);
 app.use('/users', usersRouter); // Ensure this line is present

@@ -2,8 +2,13 @@ extends layout
 
 block content
   h1 Login
-  if error_msg
-    .alert.alert-danger= error_msg
+
+  // Alert Section
+  if alerts
+    each alert in alerts
+      .alert(class=alert.type, style='padding: 10px; margin-bottom: 10px;')
+        p= alert.message
+
   form(action='/users/login' method='POST')
     .form-group 
       label(for='email') Email 

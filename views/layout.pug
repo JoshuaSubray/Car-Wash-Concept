@@ -36,10 +36,12 @@ html
             li.nav-item
               a.nav-link(href='/users/logout') Logout
     .container
-      if success_msg
-        .alert.alert-success= success_msg
-      if error_msg
-        .alert.alert-danger= error_msg
+      // Alert Section
+      if alerts
+        each alert in alerts
+          .alert(class=alert.type, style='padding: 10px; margin-bottom: 10px;')
+            p= alert.message
+
       block content
 
 

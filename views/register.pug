@@ -3,16 +3,11 @@ extends layout
 block content
   h1 Register
 
-  if success_msg
-    .alert.alert-success= success_msg
-  if error_msg
-    .alert.alert-danger= error_msg
-  if error
-    .alert.alert-danger= error
-
-  p(style='text-align: center; margin-top: 20px;') 
-    | Already have an account? 
-    a(href='/users/login') Please log in here.
+  // Alert Section
+  if alerts
+    each alert in alerts
+      .alert(class=alert.type, style='padding: 10px; margin-bottom: 10px;')
+        p= alert.message
 
   form(action='/users/register' method='POST')
     .form-group
@@ -28,3 +23,7 @@ block content
       label(for='confirmPassword') Confirm Password
       input.form-control(type='password' id='confirmPassword' name='confirmPassword' required)
     button.btn.btn-primary(type='submit') Register
+  
+  p(style='text-align: center; margin-top: 20px;') 
+    | Already have an account? 
+    a(href='/users/login') Please log in here.
