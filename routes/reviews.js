@@ -17,36 +17,37 @@ router.get('/', async (req, res) => {
   // res.render('reviews', { reviews: reviews });
 });
 
-// POST route to handle review submission.
 router.post('/', async (req, res) => {
   if (!req.isAuthenticated()) {
-    req.flash('error_msg', "Can't have no anonymous reviews, log in please.")
-    return res.redirect('/users/login')
+    req.flash('error_msg', "Can't have no anonymous reviews, log in please.");
+    return res.redirect('/users/login');
   }
 
-  const { name, email, review } = req.body;
-  // let errors = [];
+  const { name, email, review, rating } = req.body;
 
-  if(!name || !email || !review) {
-    req.flash('error_msg', "you forgot either your name or review or email lol");
-    return res.redirect('/reviews')
+  // Validate inputs
+  if (!name || !email || !review || !rating) {
+    req.flash('error_msg', "Please fill out all fields, including the rating.");
+    return res.redirect('/reviews');
+  }
+
+  if (isNaN(rating) || rating < 1 || rating > 5) {
+    req.flash('error_msg', "Rating must be a number between 1 and 5.");
+    return res.redirect('/reviews');
   }
 
   try {
-    const newReview = new Review({name, email, review})
+    const newReview = new Review({ name, email, review, rating });
     await newReview.save();
 
-  // Save the review in memory (or replace this with a database logic).
-  // reviews.push({ name, review });
-
-  // Redirect to the reviews page after submission.
-  req.flash('success_msg', 'Your review has been submitted!');
-  res.redirect('/reviews');
+    req.flash('success_msg', 'Your review has been submitted!');
+    res.redirect('/reviews');
   } catch (err) {
     req.flash('error_msg', 'There was a problem submitting your review, retry.');
     res.redirect('/reviews');
   }
 });
+
 
 module.exports = router;
 
