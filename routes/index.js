@@ -23,7 +23,6 @@ router.use('/payment', paymentRouter);
 const reviewsRouter = require('./reviews');
 router.use('/reviews', reviewsRouter);
 
-router.use('/contact', contact);
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -40,9 +39,5 @@ router.get('/prices', function (req, res, next) {
   res.render('prices', { title: 'Our Prices' });
 });
 
-/* GET contact page. */
-router.get('/contact', function (req, res, next) {
-  res.render('contact', { title: 'Contact Us' });
-});
 
 module.exports = router;
