@@ -2,7 +2,7 @@ const express = require('express');
 const methodOverride = require('method-override');
 const router = express.Router();
 const { mongoose, loginConnection } = require('../config/db');
-const contact = require('./contact');
+const contactRouter = require('./contact');
 
 router.use(express.urlencoded({ extended: true }));
 router.use(methodOverride('_method'));
@@ -23,6 +23,8 @@ router.use('/payment', paymentRouter);
 const reviewsRouter = require('./reviews');
 router.use('/reviews', reviewsRouter);
 
+// contact router.
+router.use('/contact', contactRouter);
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
