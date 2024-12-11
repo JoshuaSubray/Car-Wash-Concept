@@ -8,9 +8,7 @@ router.get('/', (req, res) => {
 
 // Handle form submission
 router.post('/', (req, res) => {
-    const { name, email, message } = req.body;
-    // Process the form data (e.g., save to database, send email, etc.)
-    res.send('Form submitted successfully');
+    res.send('<script>alert("Form submitted successfully"); window.location.href="/";</script>');
 });
 
 module.exports = router;
