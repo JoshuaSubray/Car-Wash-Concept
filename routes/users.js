@@ -40,7 +40,7 @@ router.post('/register', async (req, res) => {
       user = new User({ username, email, password });
       await user.save();
       req.flash('success_msg', 'You are now registered and can log in');
-      res.redirect('/');
+      return res.redirect('/');
     } catch (err) {
       console.error('Error registering user:', err);
       req.flash('error_msg', 'Error registering user');
