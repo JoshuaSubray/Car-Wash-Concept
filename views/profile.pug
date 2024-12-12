@@ -1,34 +1,27 @@
 extends layout
 
 block content
-  section.profile-container(style='border: 15px solid black;')
-    // Alert Section with Icon and Animation
-    if alerts
-      each alert in alerts
-        .alert(class=alert.type, style='padding: 10px; margin-bottom: 10px; animation: fadeIn 0.5s;')
-          i.fa(class=`fa-${alert.type === 'success' ? 'check-circle' : 'exclamation-circle'}`).me-2
-          p= alert.message
-
+  section.profile-container
     if user
       //- admin specific text.
       if user.type === 'admin'
         h1.text-center.text-primary.mb-4(style='font-size: 36px;') Admin Interface
         .profile-header.text-center
-          h2.mt-5(style='font-size: 28px; color: #007bff;') Welcome, Admin #{user.username}!
+          h2.mt-5(style='font-size: 28px; color: #007bff; ') Welcome, Admin #{user.username}!
       //- customer specific text.
       else
-        h1.text-center.text-primary.mb-4(style='font-size: 36px;') Your Profile
+        h1.text-center.text-primary.mb-4(style='font-size: 36px; color: #007bff;') Your Profile
         .profile-header.text-center
           h2.mt-5(style='font-size: 28px; color: #007bff;') Welcome, #{user.username}!
     .profile-header.text-center
       p.mt-2(style='font-size: 18px; color: #6c757d;') Email: #{user.email}
 
-      // Admin Specific Section
+      //- admin can view and manage all appointments.
       if user.type === 'admin'
-        h3.text-center.mt-5.text-primary(style='font-size: 24px;') Manage Appointments
+        h3.text-center.mt-5(style='font-size: 24px;') Appointment Manager
         if appointments.length
           .table-responsive.mt-4
-            table.table.table-hover.table-striped.text-center
+            table.table.table-striped.table-bordered.text-center
               thead.table-dark
                 tr
                   th Name
@@ -51,49 +44,17 @@ block content
                     td= appointment.message || 'N/A'
                     td
                       form(action=`/appointments/${appointment._id}/cancel` method='POST')
-                        button.btn.btn-outline-danger(type='submit' title='Complete and Delete Appointment')
-                          i.fa.fa-trash-alt.me-2
-                          | Set Complete
-        else
-          .alert.alert-info.text-center.mt-4(style='font-size: 18px;') 
-            | No appointments available.
+                        button.btn.btn-danger(type='submit') Set Complete & Delete Appointment
 
-      // User Specific Section
-      if user
-        h3.text-center.mt-5.text-primary(style='font-size: 24px;') Your Appointments
-        if appointments.length
-          .table-responsive.mt-4
-            table.table.table-hover.table-striped.text-center
-              thead.table-dark
-                tr
-                  th Name
-                  th Email
-                  th Date
-                  th Package
-                  th Price
-                  th Message
-                  th Action
-              tbody
-                each appointment in appointments
-                  tr
-                    td= appointment.name
-                    td= appointment.email
-                    td= appointment.date.toDateString()
-                    td= appointment.package
-                    td= appointment.price
-                    td= appointment.message || 'N/A'
-                    td
-                      form(action=`/appointments/${appointment._id}/cancel` method='POST')
-                        button.btn.btn-outline-danger(type='submit' title='Cancel this Appointment')
-                          i.fa.fa-times-circle.me-2
-                          | Cancel
         else
-          p.text-center.mt-4 No appointments found.
+          p.text-center.text-muted.mt-4(style='font-size: 18px;') No appointments available.
+
+      //- user can view only their appointments.
       else
-        h3.text-center.mt-5(style='font-size: 24px;') Your Appointments
+        h3.text-center.mt-5(style='font-size: 24px; color: #007bff;') Your Appointments
         if appointments.length
           .table-responsive.mt-4
-            table.table.table-hover.table-striped.text-center
+            table.table.table-striped.table-bordered.text-center
               thead.table-dark
                 tr
                   th Name
@@ -118,3 +79,23 @@ block content
 
         else
           p.text-center.text-muted.mt-4(style='font-size: 18px;') You have no appointments booked.
+    h3.text-center.mt-5(style='font-size: 24px; color: #007bff') Your Reviews
+    if reviews && reviews.length > 0
+      .table-responsive.mt-4
+        table.table.table-striped.table-bordered.text-center
+          thead.table-dark
+            tr
+              th Review
+              th Name
+              th Date
+              th Email
+            tbody
+              each review in reviews
+                tr
+                  td(style='font-style: italic;') "#{review.review}"
+                  td= review.name
+                  //- td= review.date.toDateString()
+                  td= review.date.toLocaleString()
+                  td= review.email
+    else
+      p.text-center.text-muted.mt-4(style='font-size: 18px;') You have not left any reviews yet.
